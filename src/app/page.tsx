@@ -1,5 +1,23 @@
-export default function Home() {
+import prisma from "@/lib/prisma";
+import JobListItem from "./components/job-list-item";
+
+const Home = async () => {
+  const jobs = await prisma.job.findMany({
+    where: {
+      approved: true,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24"></main>
+    <main>
+      {jobs.map((job) => (
+        <JobListItem job={job} key={job.id} />
+      ))}
+    </main>
   );
-}
+};
+
+export default Home;
