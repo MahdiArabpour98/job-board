@@ -21,6 +21,7 @@ import { X } from "lucide-react";
 import RichTextEditor from "@/components/rich-text-editor";
 import { draftToMarkdown } from "markdown-draft-js";
 import LoadingButton from "@/components/loading-button";
+import { createJobPosting } from "@/app/jobs/new/actions";
 
 const NewJobForm = () => {
   const form = useForm<CreateJobValues>({
@@ -37,8 +38,20 @@ const NewJobForm = () => {
     formState: { isSubmitting },
   } = form;
 
-  const onSubmit = (values: CreateJobValues) => {
-    alert(JSON.stringify(values, null, 2));
+  const onSubmit = async (values: CreateJobValues) => {
+    const formData = new FormData();
+
+    Object.entries(values).forEach(([key, value]) => {
+      if (value) {
+        formData.append(key, value);
+      }
+    });
+
+    try {
+      await createJobPosting(formData);
+    } catch (error) {
+      alert("Something went wrong. Please try again.");
+    }
   };
 
   return (
@@ -145,7 +158,16 @@ const NewJobForm = () => {
                 <FormItem>
                   <FormLabel>Location</FormLabel>
                   <FormControl>
-                    <Select {...field} defaultValue="">
+                    <Select
+                      {...field}
+                      defaultValue=""
+                      onChange={(e) => {
+                        field.onChange(e);
+                        if (e.currentTarget.value === "Remote") {
+                          trigger("location");
+                        }
+                      }}
+                    >
                       <option value="" hidden>
                         Select an option
                       </option>
