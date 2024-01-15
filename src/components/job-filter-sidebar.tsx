@@ -88,10 +88,12 @@ const JobFilterSidebar = async ({ defaultValues }: JobFilterSidebarProps) => {
               type="checkbox"
               id="remote"
               name="remote"
-              className="scale-125 accent-black"
+              className="scale-125 cursor-pointer accent-primary"
               defaultChecked={defaultValues.remote}
             />
-            <Label htmlFor="remote">Remote jobs</Label>
+            <Label htmlFor="remote" className="cursor-pointer">
+              Remote jobs
+            </Label>
           </div>
           <FormSubmitButton className="w-full">Filter jobs</FormSubmitButton>
         </div>
