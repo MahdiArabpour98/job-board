@@ -11,9 +11,18 @@ const Navbar = () => {
           <Image src={logo} alt="Flow Jobs logo" width={40} height={40} />
           <span className="text-xl font-bold tracking-tight">Flow Jobs</span>
         </Link>
-        <Button asChild>
-          <Link href="/jobs/new">Post a job</Link>
-        </Button>
+        <div className="flex items-center gap-2 ">
+          <div className="flex flex-col gap-2 text-xs text-muted-foreground">
+            <span>username: mahdi109110@gmail.com</span>
+            <span>password: flowjob1234</span>
+          </div>
+          <Button asChild>
+            <Link href="/admin">Admin page</Link>
+          </Button>
+          <Button asChild>
+            <Link href="/jobs/new">Post a job</Link>
+          </Button>
+        </div>
       </nav>
     </header>
   );
