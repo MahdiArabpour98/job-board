@@ -2,7 +2,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { Metadata } from "next";
 import AdminNavbar from "@/app/admin/admin-navbar";
 
-export const metaData: Metadata = {
+export const metadata: Metadata = {
   title: "Admin",
 };
 
